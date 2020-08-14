@@ -10,3 +10,13 @@ and the message sent in chunks while recording for better performance and
 longer messages.
 
 Requires FFMPEG to be installed with ffplay.
+
+## Install
+
+```shell script
+git clone https://github.com/alexandrucancescu/Web-Voice-Message.git
+cd Web-Voice-Message
+npm install --production
+node dist/Run.js
+
+```
