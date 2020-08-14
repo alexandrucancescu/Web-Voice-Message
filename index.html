@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Web Message</title>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app">
+		<div class="container" v-if="canRecord">
+			<div class="section">
+				<div class="row">
+					<div class="col s12" style="text-align: center">
+						<button ref="recording_button"
+								@click="toggleRecording()"
+								:class="(isRecording? 'recording' : 'not_recording') + (isSending? ' disabled-rec' : '')"
+								id="recording_button">
+						</button>
+					</div>
+				</div>
+				<div class="row" style="text-align: center">
+					<span style="font-size: 1.3em;color: crimson">{{recMessage}}</span>
+				</div>
+			</div>
+			<div class="divider"></div>
+			<div class="row section">
+				<span style="font-size: 1.5em; color: darkgrey">{{message}}</span>
+			</div>
+			<div class="divider" v-if="hasRecording"></div>
+			<div class="row section" v-if="hasRecording && !isSending">
+				<a @click="cancel()"
+				   class="waves-effect waves-light btn red">Cancel</a>
+				<a @click="sendRecording()"
+				   class="waves-effect waves-light btn blue">
+					<i class="material-icons right">send</i>Send
+				</a>
+			</div>
+			<div class="row section" v-else-if="isSending">
+				<div class="progress">
+					<div class="indeterminate"></div>
+				</div>
+			</div>
+		</div>
+		<div class="container" v-else>
+			<div class="row">
+				<div class="col s6 offset-s3">
+					<h2 style="color: crimson; text-align: center">Please allow microphone usage</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://unpkg.com/mic-recorder-to-mp3@2.2.1/dist/index.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
